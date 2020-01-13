@@ -2,30 +2,80 @@
 
 > React components for Tableau extensions development
 
-[![NPM](https://img.shields.io/npm/v/tableau-extensions.svg)](https://www.npmjs.com/package/tableau-extensions) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
 ## Install
 
 ```bash
-npm install --save tableau-extensions
+yarn add https://github.com/clar-reese/tableau-extensions-library.git
 ```
 
 ## Usage
 
+### Basic Extension
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
+import { TableauExtension } from 'tableau-extensions'
 
-import MyComponent from 'tableau-extensions'
-
-class Example extends Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
+const Example = () => {
+  return (
+    <TableauExtension>
+      Basic Tableau extension code goes here!
+    </TableauExtension>
+  )
 }
 ```
+### With Configuration Dialog
+```jsx
+import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { TableauExtension } from 'tableau-extensions'
 
-## License
+const Home = () => {
+  return "Main page content goes here!"
+}
 
-MIT © [clar-reese](https://github.com/clar-reese)
+const Configure = () => {
+  return "Configuration options go here!"
+}
+
+const Example {
+  return (   
+    <TableauExtension
+      configDialogUrl="configure"
+      configDialogDimensions={{ height: 230, width: 400 }}> 
+      <BrowserRouter>
+        <Switch>
+           <Route path="/" component={Home} exact />
+           <Route path="/configure" component={Configure} />
+        </Switch>
+      </BrowserRouter>
+    </TableauExtension>
+  );
+}
+```
+### With Popup Dialog
+```jsx
+import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { TableauExtension, TableauDialog, TableauDialogOpen } from 'tableau-extensions'
+
+const Home = () => {
+  return <TableauDialogOpen url="popup">Click this to open the dialog!</TableauDialogOpen>
+}
+
+const Popup = () => {
+  return <TableauDialog>"Popup dialog content goes here!"</TableauDialog>
+}
+
+const Example = () => {
+  return (   
+    <TableauExtension> 
+      <BrowserRouter>
+        <Switch>
+           <Route path="/" component={Home} exact />
+           <Route path="/popup" component={Popup} />
+        </Switch>
+      </BrowserRouter>
+    </TableauExtension>
+  );
+}
+```
