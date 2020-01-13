@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 
 const TableauExtension = ({
   // URL of the content of the config dialog
@@ -8,8 +8,7 @@ const TableauExtension = ({
   // Additional function to run upon initialization
   initFunc = null,
   children}) => {
-
-  let isInitialized = false;
+  const [isInitialized,setIsInitialized] = useState(false)
 
   // Create configuration popup dialog
   const configure = () => { 
@@ -33,7 +32,7 @@ const TableauExtension = ({
       .initializeAsync(configDialogUrl !== null ? {configure: configure} : null)
       .then(function() { 
         console.log("Initialize API")
-        isInitialized = true
+        setIsInitialized(true);
         if (initFunc !== null) {
           initFunc();
         }
