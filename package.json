@@ -57,5 +57,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "extensions-api-sdk": "tableau/extensions-api"
+  }
 }

@@ -1,22 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import 'extensions-api-sdk/lib/tableau.extensions.1.latest';
+import TableauExtension from './lib/TableauExtension'
+import TableauDialog from './lib/TableauDialog'
+import TableauDialogOpen from './lib/TableauDialogOpen'
 
-import styles from './styles.css'
-
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+export { TableauExtension, TableauDialog, TableauDialogOpen }
