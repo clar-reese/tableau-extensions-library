@@ -1,12 +1,18 @@
 import React, { useState, Fragment } from 'react';
 
-const TableauDialog = ({buildFunc, children}) => {
+const TableauDialog = ({buildFunc = null, children}) => {
 	const [isInitialized,setIsInitialized] = useState(false);
 
 	if (!isInitialized) {
 		window.tableau.extensions.initializeDialogAsync()
 			.then(function (payload) {
-		        payload !== "" ? buildFunc(JSON.parse(payload)) : buildFunc();
+				if (buildFunc !== null) {
+		        	if (payload !== "") {
+		        		buildFunc(JSON.parse(payload));
+		        	} else { 
+		        		buildFunc();
+		        	}
+		        }
 		        setIsInitialized(true);
 		    });
 	}
